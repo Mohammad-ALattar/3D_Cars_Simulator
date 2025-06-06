@@ -34,7 +34,7 @@ const WindowTint: React.FC<WindowTintProps> = ({
 }) => {
   const [showingFrontWindshield, setShowingFrontWindshield] = useState(false);
   const [showingBackWindshield, setShowingBackWindshield] = useState(false);
-  
+
   const isMobile = useIsMobile();
 
   const toggleView = () => {
@@ -59,42 +59,40 @@ const WindowTint: React.FC<WindowTintProps> = ({
       </div>
 
       <div className={cn(
-        `bg-white p-6 3xl:w-[490px] w-full rounded-b-[20px] md:rounded-r-[20px] md:rounded-bl-[20px] h-auto 3xl:h-[238px]`,
+        `bg-white p-6 2xl:w-[490px]  w-full rounded-b-[20px] xl:rounded-bl-none md:rounded-r-[20px] md:rounded-bl-[20px] h-auto 2xl:h-[238px]`,
         !isDefaultOption && "md:rounded-[20px]",
         isLastOption && !isMobile && "rounded-bl-none",
         isMobile && "mt-0"
       )}>
-        {isDefaultOption ? (
-          showingFrontWindshield ? (
-            <div className='flex flex-col gap-4'>
-              <FrontWindshieldControl
-                frontTintPercent={frontTintPercent}
-                onFrontTintChange={onFrontTintChange}
-                onToggleView={toggleView}
-              />
-            </div>
-          ) : (
-            <div className='flex flex-col gap-4'>
-              <WindowSectionControl
-                title="FRONT WINDOWS"
-                tintPercent={frontSideTintPercent}
-                onTintChange={onFrontSideTintChange}
-                rightButton={{
-                  label: "TOGGLE FRONT WINDSHIELD",
-                  onClick: toggleView
-                }}
-              />
-
-              <WindowSectionControl
-                title="REAR WINDOWS"
-                tintPercent={rearSideTintPercent}
-                onTintChange={onRearSideTintChange}
-              />
-            </div>
-          )
+        {/* {isDefaultOption ? ( */}
+        {showingFrontWindshield ? (
+          <div className='flex flex-col gap-4'>
+            <FrontWindshieldControl
+              frontTintPercent={frontTintPercent}
+              onFrontTintChange={onFrontTintChange}
+              onToggleView={toggleView}
+            />
+          </div>
         ) : (
-          <ComingSoonCard tintType={tintType} />
+          <div className='flex flex-col gap-4'>
+            <WindowSectionControl
+              title="FRONT WINDOWS"
+              tintPercent={frontSideTintPercent}
+              onTintChange={onFrontSideTintChange}
+              rightButton={{
+                label: "TOGGLE FRONT WINDSHIELD",
+                onClick: toggleView
+              }}
+            />
+
+            <WindowSectionControl
+              title="REAR WINDOWS"
+              tintPercent={rearSideTintPercent}
+              onTintChange={onRearSideTintChange}
+            />
+          </div>
         )}
+
       </div>
     </div>
 

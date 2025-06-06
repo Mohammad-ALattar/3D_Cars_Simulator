@@ -331,14 +331,9 @@ export default function ModalSubmitSelection({
                   onClick={handleClose}
                   className=" py-3 bg-black text-white font-bold w-[320px] h-[40px]"
                 >
-                  MAKE ANOTHER SELECTION
+                  SUBMIT ANOTHER SELECTION
                 </Button>
-                <Button
-                  onClick={handleClose}
-                  className="w-[320px] h-[40px] py-3 bg-white text-black border border-gray-300 font-bold hover:bg-gray-50"
-                >
-                  CANCEL SUBMISSION
-                </Button>
+               
               </div>
             </div>
           )}

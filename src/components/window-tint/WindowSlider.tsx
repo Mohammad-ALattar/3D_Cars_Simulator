@@ -90,9 +90,9 @@ const WindowSlider: React.FC<WindowSliderProps> = ({
         onClick={() => onChange(5)}
       >
         <p className='text-xs'>
-          without
+          Without
           <br />
-          tint
+          Tint
         </p>
       </Button>
     </div>

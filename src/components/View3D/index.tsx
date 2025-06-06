@@ -71,7 +71,7 @@ const View3D = () => {
             onTintTypeChange={setTintType}
           />
         </div>
-        <div className="absolute px-3 pb-5 w-full bottom-[-180px] xl:w-auto xl:p-0 xl:z-10 xl:bottom-2 xl:left-[800px] 2xl:left-[900px]">
+        <div className="absolute px-3 pb-5 w-full bottom-[-180px] 2xl:w-auto xl:p-0 xl:z-10 xl:bottom-2 xl:left-[800px] 2xl:left-[900px]">
           <ColorPicker
             selectedColor={carColor}
             onSelectColor={setCarColor}
