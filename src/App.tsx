@@ -4,6 +4,7 @@ import routes from "~react-pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TokenGuard from "@/components/TokenGuard";
 import { Suspense } from "react";
+import { Analytics } from '@vercel/analytics/react'; // ✅ Use this for Vite
 
 const AppRoutes = () => useRoutes(routes);
 
@@ -19,6 +20,7 @@ export default function App() {
           </Suspense>
         </TokenGuard>
       </BrowserRouter>
+      <Analytics />
     </QueryClientProvider>
   );
 }

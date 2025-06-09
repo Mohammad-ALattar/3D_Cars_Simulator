@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import TintTypeSelector from './window-tint/TintTypeSelector';
 import FrontWindshieldControl from './window-tint/FrontWindshieldControl';
 import WindowSectionControl from './window-tint/WindowSectionControl';
-import ComingSoonCard from './window-tint/ComingSoonCard';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 

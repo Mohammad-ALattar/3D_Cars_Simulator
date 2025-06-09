@@ -23,8 +23,6 @@ type ToastProps = {
   onClose: () => void;
 };
 
-
-
 const FormSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email"),
@@ -47,7 +45,6 @@ export type TintData = {
   ppfOption: string;
   carColor: string;
   vehicleType: "SEDAN" | "SUV" | "PICKUP"
-
 };
 
 type ModalSubmitSelectionProps = {
@@ -166,10 +163,14 @@ export default function ModalSubmitSelection({
       setIsSubmitting(false);
     }
   };
+
   return (
     <>
       <Dialog open={open} onOpenChange={handleClose}>
-        <DialogContent className="!w-[702px]" style={{ background: 'linear-gradient(to bottom, #FBFF8899, #F9FD81)' }}>
+        <DialogContent
+          className="w-[95vw] max-w-[702px] max-h-[90vh] overflow-y-auto"
+          style={{ background: 'linear-gradient(to bottom, #FBFF8899, #F9FD81)' }}
+        >
           {currentStep === 'form' ? (
             <>
               <DialogHeader>
@@ -179,31 +180,32 @@ export default function ModalSubmitSelection({
               </DialogHeader>
 
               <div className="space-y-2 text-sm mb-6">
-                <div className="flex gap-6">
-                  <span className="font-normal">Type:</span>
+                <div className="flex flex-col sm:flex-row sm:gap-6">
+                  <span className="font-normal min-w-fit">Type:</span>
                   <span className="font-semibold">{tintData.vehicleType}</span>
                 </div>
-                <div className="flex gap-6">
-                  <span className="font-normal">Front Windows:</span>
+                <div className="flex flex-col sm:flex-row sm:gap-6">
+                  <span className="font-normal min-w-fit">Front Windows:</span>
                   <span className="font-semibold">{tintData.frontSideTintPercent}%</span>
                 </div>
-                <div className="flex gap-6">
-                  <span className="font-normal">Rare Windows:</span>
+                <div className="flex flex-col sm:flex-row sm:gap-6">
+                  <span className="font-normal min-w-fit">REAR Windows:</span>
                   <span className="font-semibold">{tintData.rearSideTintPercent}%</span>
                 </div>
-                <div className="flex gap-6">
-                  <span className="font-normal">Film Type</span>
+                <div className="flex flex-col sm:flex-row sm:gap-6">
+                  <span className="font-normal min-w-fit">Film Type:</span>
                   <span className="font-semibold">{tintData.tintType.replace("-", " ").toUpperCase()}</span>
                 </div>
-                <div className="flex gap-6">
-                  <span className="font-normal">PPF</span>
+                <div className="flex flex-col sm:flex-row sm:gap-6">
+                  <span className="font-normal min-w-fit">PPF:</span>
                   <span className="font-semibold">{tintData.ppfOption === 'no' ? 'NO' : tintData.ppfOption.replace("-", " ").toUpperCase()}</span>
                 </div>
               </div>
 
               {/* Form Section */}
               <div className="space-y-4">
-                <div className="flex gap-4">
+                {/* First row - Personal Info */}
+                <div className="flex flex-col lg:flex-row gap-4">
                   <div className="flex flex-col gap-2 flex-1">
                     <Input
                       placeholder="Full Name"
@@ -242,7 +244,8 @@ export default function ModalSubmitSelection({
                   </div>
                 </div>
 
-                <div className="flex gap-4">
+                {/* Second row - Car Info */}
+                <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex flex-col gap-2 flex-1">
                     <Input
                       placeholder="Year"
@@ -265,6 +268,10 @@ export default function ModalSubmitSelection({
                       </p>
                     )}
                   </div>
+                </div>
+
+                {/* Third row - Model and Zip */}
+                <div className="flex flex-col sm:flex-row gap-4">
                   <div className="flex flex-col gap-2 flex-1">
                     <Input
                       placeholder="Model"
@@ -286,7 +293,6 @@ export default function ModalSubmitSelection({
                     {errors.zipCode && (
                       <p className="text-sm text-red-500">
                         {(errors.zipCode as FieldError).message as string}
-
                       </p>
                     )}
                   </div>
@@ -297,49 +303,49 @@ export default function ModalSubmitSelection({
                   {...register("notes")}
                   className="h-24"
                 />
+
                 <div className="flex justify-center py-5">
                   <Button
                     onClick={handleSubmit(onSubmit)}
-                    className="w-[320px] !self-center h-[40px] bg-black text-white font-bold py-3 text-sm"
+                    className="w-full max-w-[320px] h-[40px] bg-black text-white font-bold py-3 text-sm"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "SUBMITTING..." : "SUBMIT SELECTION"}
                   </Button>
                 </div>
-                <div className="flex justify-center text-red-600">
 
-                  {toast?.message}
-                </div>
+                {toast?.message && (
+                  <div className="flex justify-center text-red-600 text-center px-4">
+                    {toast.message}
+                  </div>
+                )}
               </div>
             </>
           ) : (
-            <div className="text-center flex flex-col py-8 gap-4">
-              <div className="mb-6 flex flex-col gap-4  items-center">
+            <div className="text-center flex flex-col py-8 gap-4 px-4">
+              <div className="mb-6 flex flex-col gap-4 items-center">
                 <div className="relative w-fit flex justify-center">
                   {/* Glow background */}
                   <div className="absolute inset-[-20px] z-0 p-20 blur-[50.5px] bg-[#ffffff] opacity-40 rounded-full" />
-
                   {/* Foreground image */}
-                  <img src={success} alt="Success" className="relative z-10" />
+                  <img src={success} alt="Success" className="relative z-10 w-16 h-16 sm:w-auto sm:h-auto" />
                 </div>
                 <h2 className="text-base font-bold text-black mb-2">THANK YOU!</h2>
-                <p className="text-gray-800 text-base font-bold">Your selection has been submitted</p>
+                <p className="text-gray-800 text-base font-bold px-4">Your selection has been submitted</p>
               </div>
 
-              <div className="space-y-3  mt-16 flex flex-col  items-center">
+              <div className="space-y-3 mt-8 sm:mt-16 flex flex-col items-center">
                 <Button
                   onClick={handleClose}
-                  className=" py-3 bg-black text-white font-bold w-[320px] h-[40px]"
+                  className="py-3 bg-black text-white font-bold w-full max-w-[320px] h-[40px] text-sm"
                 >
                   SUBMIT ANOTHER SELECTION
                 </Button>
-               
               </div>
             </div>
           )}
         </DialogContent>
       </Dialog>
-
     </>
   );
 }

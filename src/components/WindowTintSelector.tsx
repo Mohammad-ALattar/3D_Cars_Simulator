@@ -27,7 +27,7 @@ export default function WindowTintSelector({
 
   const tintOptions: TintOption[] = [
     { value: 'Front Windows Tint', percentage: frontSideTintPercent, label: 'Front Windows Tint' },
-    { value: 'Rare Windows Tint', percentage: rearSideTintPercent, label: 'Rare Windows Tint' },
+    { value: 'REAR Windows Tint', percentage: rearSideTintPercent, label: 'REAR Windows Tint' },
     { value: 'Front WindSheild Tint', percentage: frontTintPercent, label: 'Front WindSheild Tint' },
   ];
 

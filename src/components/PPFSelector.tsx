@@ -43,7 +43,7 @@ const PPFSelector: React.FC<PPFSelectorProps> = ({
   ];
 
   return (
-    <div className="w-full mb-6">
+    <div className="w-full">
       <Button
         className="text-center !bg-transparent w-full text-sm uppercase tracking-wider text-[11px] md:text-[13px] text-[#000] font-bold mb-2 flex items-center justify-center gap-1"
         onClick={() => isMobile && setExpanded(!expanded)}

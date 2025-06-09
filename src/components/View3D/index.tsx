@@ -24,9 +24,9 @@ const View3D = () => {
 
   return (
     <div className="flex flex-col w-full h-screen">
-      <header className="2xl:fixed 2xl:top-[-20px] 2xl:left-0 2xl:right-0 z-10">
-        <Header />
-        <div className={`${isMobile ? 'px-4' : ' '}`}>
+      <Header />
+      <header className="2xl:fixed 2xl:top-[10px] 2xl:left-0 2xl:right-0 z-10">
+        <div className={`${isMobile ? 'px-4' : ''}`}>
           <VehicleTypeSelector
             selectedType={vehicleType}
             onSelectType={setVehicleType}
@@ -38,8 +38,8 @@ const View3D = () => {
         />
       </header>
 
-      <main className="2xl:flex-grow 2xl:relative 2xl:mb-5">
-        <div className="absolute max-2xl:bottom-32 inset-0 2xl:!mb-32">
+      <main className="2xl:flex-grow 2xl:relative 2xl:mb-0">
+        <div className="absolute max-2xl:bottom-32 inset-1 2xl:!mb-40">
           <Car3DViewer
             vehicleType={vehicleType}
             color={carColor}
