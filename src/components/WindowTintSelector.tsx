@@ -20,8 +20,7 @@ export default function WindowTintSelector({
   carColor,
   vehicleType
 }: TintData) {
-  console.log(frontTintPercent, "fronttt")
-  console.log(frontTintPercent, "front windiws")
+
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -42,10 +41,9 @@ export default function WindowTintSelector({
     vehicleType
   };
 
-
   return (
     <>
-      <div className="max-3xl:hidden  2xl:absolute 2xl:right-10 2xl:bottom-2">
+      <div className="hidden">
         <div
           className={`rounded-[20px] overflow-hidden mb-4 2xl:w-[464px] 3xl:max-w-[464px] h-[384px] shadow-lg`}
           style={{ background: 'linear-gradient(to bottom, #FBFF881C, #F9FD81)' }}
@@ -113,11 +111,13 @@ export default function WindowTintSelector({
       </div>
       <button
         onClick={() => setModalOpen(true)}
-        className="fixed 3xl:hidden z-10 bottom-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-yellow-300 shadow-md text-black"
+        className=" z-10 bottom-4  p-4 gap-2  flex items-center justify-center rounded-lg bg-yellow-300 shadow-md text-black"
         aria-label="Tint information"
       >
         <img src="/excemlation-mark.svg" alt="Autobahn" className="w-[10px] h-[20px]" />
-
+        <p>
+          Submit Selection
+        </p>
       </button>
     </>
   );

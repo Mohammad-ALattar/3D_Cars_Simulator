@@ -1,6 +1,6 @@
 import React, { useState, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Stage } from '@react-three/drei';
+import { OrbitControls, useGLTF, Stage, Loader } from '@react-three/drei';
 import GLBModel from './GLBModel';
 
 interface Car3DViewerProps {
@@ -15,13 +15,14 @@ interface Car3DViewerProps {
   autoRotate: boolean;
 }
 
-const preloadModel = (vehicleType: string) => {
+const preloadModel = (vehicleType: string, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => {
+  setLoading(true);
   switch (vehicleType) {
     case "SEDAN":
       useGLTF.preload("/2020_Porsche_Taycan.glb");
       break;
     case "SUV":
-      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022.glb");
+      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb");
       break;
     case "PICKUP":
       useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022.glb");
@@ -29,6 +30,7 @@ const preloadModel = (vehicleType: string) => {
     default:
       useGLTF.preload("/2020_Porsche_Taycan.glb");
   }
+  setLoading(false);
 };
 
 const Car3DViewer: React.FC<Car3DViewerProps> = ({
@@ -43,9 +45,10 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
   autoRotate
 }) => {
   const [showPPF, setShowPPF] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    preloadModel(vehicleType);
+    preloadModel(vehicleType, setLoading);
 
     if (ppfOption !== 'none') {
       setShowPPF(true);
@@ -86,7 +89,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
         }}
         style={{ touchAction: 'none' }}
       >
-        <Suspense fallback={null}>
+        <Suspense>
           <Stage
             intensity={isMobile ? 1.2 : 1.5}
             environment="city"
@@ -105,7 +108,6 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
             />
           </Stage>
 
-          {/* Responsive lighting */}
           <ambientLight intensity={isMobile ? 1.0 : 1.2} />
           <directionalLight
             position={[10, 10, 5]}
