@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from './ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
-import {
-  ChevronDown,
-  ChevronUp
-} from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 interface PPFSelectorProps {
   selectedOption: string;
@@ -17,7 +14,7 @@ const PPFSelector: React.FC<PPFSelectorProps> = ({
   onSelectOption
 }) => {
   const isMobile = useIsMobile();
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const options = [
     {
@@ -46,14 +43,17 @@ const PPFSelector: React.FC<PPFSelectorProps> = ({
     <div className="w-full">
       <Button
         className="text-center !bg-transparent w-full text-sm uppercase tracking-wider text-[11px] md:text-[13px] text-[#000] font-bold mb-2 flex items-center justify-center gap-1"
-        onClick={() => isMobile && setExpanded(!expanded)}
+        onClick={() => setExpanded(!expanded)}
       >
-        Paint Protection Film (PPF) Kits
-        {isMobile && (expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />)}
+        PAINT PROTECTION FILM (PPF) KITS
+        {expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
       </Button>
 
-      {(expanded || !isMobile) && (
-        <div className={`flex flex-wrap ${isMobile ? 'gap-1' : 'gap-2'} justify-center`}>
+      <div className={cn(
+        "overflow-hidden transition-all duration-300 ease-in-out",
+        expanded ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
+      )}>
+        <div className="flex gap-4 justify-center flex-wrap pb-4">
           {options.map((option) => (
             <Button
               key={option.id}
@@ -70,7 +70,7 @@ const PPFSelector: React.FC<PPFSelectorProps> = ({
             </Button>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 };

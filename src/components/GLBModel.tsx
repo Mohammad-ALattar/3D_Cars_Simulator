@@ -30,8 +30,8 @@ const GLBModel: React.FC<GLBModelProps> = ({
 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const modelPath = vehicleType === 'SEDAN'
-    ? "/2020_Porsche_Taycan.glb" : vehicleType === 'PICKUP' ?
-      "/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022.glb" : "/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022.glb";
+    ? "/2020_Porsche_Taycan_LP.glb" : vehicleType === 'PICKUP' ?
+      "/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP.glb" : "/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb";
   const { scene } = useGLTF(modelPath);
 
   const carColor = new THREE.Color(getCarColor(color));

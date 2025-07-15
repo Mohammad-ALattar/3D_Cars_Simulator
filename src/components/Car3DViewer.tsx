@@ -1,6 +1,6 @@
 import React, { useState, Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Stage } from '@react-three/drei';
+import { OrbitControls, useGLTF, Stage, Loader } from '@react-three/drei';
 import GLBModel from './GLBModel';
 
 interface Car3DViewerProps {
@@ -18,16 +18,16 @@ interface Car3DViewerProps {
 const preloadModel = (vehicleType: string) => {
   switch (vehicleType) {
     case "SEDAN":
-      useGLTF.preload("/2020_Porsche_Taycan.glb");
+      useGLTF.preload("/2020_Porsche_Taycan_LP.glb");
       break;
     case "SUV":
-      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022.glb");
+      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb");
       break;
     case "PICKUP":
-      useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022.glb");
+      useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP.glb");
       break;
     default:
-      useGLTF.preload("/2020_Porsche_Taycan.glb");
+      useGLTF.preload("/2020_Porsche_Taycan_LP.glb");
   }
 };
 
@@ -52,13 +52,12 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
     }
   }, [vehicleType, ppfOption]);
 
-  // Responsive camera settings
+
   const cameraSettings = {
     position: isMobile ? [12, 2, 12] : [9, 0, 10],
     fov: isMobile ? 50 : 40
   };
 
-  // Responsive control settings
   const controlSettings = {
     enablePan: false,
     enableZoom: true,
@@ -86,37 +85,34 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
         }}
         style={{ touchAction: 'none' }}
       >
-        <Suspense fallback={null}>
-          <Stage
-            intensity={isMobile ? 1.2 : 1.5}
-            environment="city"
-            preset="rembrandt"
-            shadows
-          >
-            <GLBModel
-              vehicleType={vehicleType}
-              color={color}
-              ppfOption={ppfOption}
-              showPPF={showPPF && ppfOption !== 'none'}
-              backTintPercent={backTintPercent}
-              frontTintPercent={frontTintPercent}
-              frontSideTintPercent={frontSideTintPercent}
-              rearSideTintPercent={rearSideTintPercent}
-            />
-          </Stage>
+        <Stage
+          intensity={isMobile ? 1.2 : 1.5}
+          environment="city"
+          preset="rembrandt"
+          shadows
+        >
+          <GLBModel
+            vehicleType={vehicleType}
+            color={color}
+            ppfOption={ppfOption}
+            showPPF={showPPF && ppfOption !== 'none'}
+            backTintPercent={backTintPercent}
+            frontTintPercent={frontTintPercent}
+            frontSideTintPercent={frontSideTintPercent}
+            rearSideTintPercent={rearSideTintPercent}
+          />
+        </Stage>
 
-          {/* Responsive lighting */}
-          <ambientLight intensity={isMobile ? 1.0 : 1.2} />
-          <directionalLight
-            position={[10, 10, 5]}
-            intensity={isMobile ? 0.6 : 0.8}
-            castShadow
-          />
-          <directionalLight
-            position={[-10, -10, -5]}
-            intensity={isMobile ? 0.3 : 0.4}
-          />
-        </Suspense>
+        <ambientLight intensity={isMobile ? 1.0 : 1.2} />
+        <directionalLight
+          position={[10, 10, 5]}
+          intensity={isMobile ? 0.6 : 0.8}
+          castShadow
+        />
+        <directionalLight
+          position={[-10, -10, -5]}
+          intensity={isMobile ? 0.3 : 0.4}
+        />
 
         <OrbitControls {...controlSettings} />
       </Canvas>
