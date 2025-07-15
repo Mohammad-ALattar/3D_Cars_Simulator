@@ -1,5 +1,5 @@
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import { Button } from '@/components/ui/button';
 import { Play, Pause } from 'lucide-react';
@@ -10,8 +10,23 @@ import ColorPickerSidebar from '../ColorPicker';
 import WindowTintSidebar from '../WindowTint';
 import Car3DViewer from '../Car3DViewer';
 import WindowTintSelector from '../WindowTintSelector';
+import { CarCustomizationLoader } from '../ui/withLoading';
+
 
 const View3D = () => {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-screen">
+        <CarCustomizationLoader message="🎨 Loading Customization Studio..." />
+      </div>
+    }>
+      <View3DComp />
+    </Suspense>
+  )
+}
+
+export default View3D;
+const View3DComp = () => {
   const [vehicleType, setVehicleType] = useState<"SEDAN" | "SUV" | "PICKUP">('SEDAN');
   const [ppfOption, setPpfOption] = useState('none');
   const [tintType, setTintType] = useState('black-vlt');
@@ -26,8 +41,6 @@ const View3D = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-
-      {/* Vehicle Selection - Sticky Header */}
       <div className="sticky z-20">
         <div className="px-4 py-0">
           <VehicleTypeSelector
@@ -56,7 +69,13 @@ const View3D = () => {
             autoRotate={autoRotate}
           />
         </div>
-        <div className="absolute bottom-6 right-6 z-10">
+        <div className="absolute bottom-4  lg:hidden right-0 z-30 px-4 ">
+          <ColorPickerSidebar
+            selectedColor={carColor}
+            onSelectColor={setCarColor}
+          />
+        </div>
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2  z-10">
           <Button
             variant="secondary"
             size="sm"
@@ -68,12 +87,14 @@ const View3D = () => {
           </Button>
         </div>
         <div className="relative">
-          <div className="absolute top-4 right-4 z-50">
-            <div className='flex flex-col gap-8'>
-              <ColorPickerSidebar
-                selectedColor={carColor}
-                onSelectColor={setCarColor}
-              />
+          <div className="absolute top-4 right-4 z-20">
+            <div className='flex flex-col gap-8 '>
+              <div className='hidden lg:block'>
+                <ColorPickerSidebar
+                  selectedColor={carColor}
+                  onSelectColor={setCarColor}
+                />
+              </div>
               <WindowTintSelector
                 frontTintPercent={frontTintPercent}
                 backTintPercent={backTintPercent}
@@ -85,7 +106,7 @@ const View3D = () => {
                 vehicleType={vehicleType}
               />
             </div>
-            
+
             <WindowTintSidebar
               frontTintPercent={frontTintPercent}
               backTintPercent={backTintPercent}
@@ -99,28 +120,8 @@ const View3D = () => {
               onTintTypeChange={setTintType}
             />
           </div>
-
-          <div className="lg:hidden">
-            <div className="fixed bottom-4 left-0 right-0 z-30 px-4">
-              <div className="flex justify-between items-end gap-4">
-                <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-3">
-                  <div className="text-xs font-medium mb-1">Window Tint</div>
-                  <div className="text-xs text-gray-500">
-                    F:{frontTintPercent}% B:{backTintPercent}%
-                  </div>
-                </div>
-
-                <ColorPickerSidebar
-                  selectedColor={carColor}
-                  onSelectColor={setCarColor}
-                />
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default View3D

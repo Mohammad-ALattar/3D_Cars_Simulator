@@ -78,10 +78,9 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
         />
       )}
 
-      {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="group relative bg-color-picker  border border-color-picker-border rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="group  relative bg-color-picker  border border-color-picker-border rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20"
         aria-label="Open color picker"
       >
         <div className="flex items-center gap-3">
@@ -94,7 +93,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
               />
             )}
           </div>
-          <div className="text-left hidden md:block">
+          <div className="text-left hidden lg:block">
             <p className="text-xs font-semibold text-foreground uppercase tracking-wide">
               Vehicle Color
             </p>
@@ -105,13 +104,11 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
         </div>
       </button>
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-color-picker-border">
           <div>
             <h2 className="text-lg font-bold text-foreground">Vehicle Color</h2>

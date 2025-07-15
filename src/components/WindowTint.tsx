@@ -139,19 +139,17 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
       <Button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "group fixed z-50 border-border  hover:bg-transparent bg-color-picker border border-color-picker-border rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
-          isMobile
-            ? "bottom-4 left-4 rounded-full w-14 h-14"
-            : " left-6 rounded-xl px-10 py-8"
+          "group fixed z-50 border-border  hover:bg-transparent bg-color-picker rounded-full border border-color-picker-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "max-lg:bottom-4 left-4 max-lg:w-14 max-lg:h-14",
+          "lg:left-6 lg:p-6"
         )}
 
         variant="outline"
       >
         <Settings className="h-5 w-5" />
-        {!isMobile && <span className="ml-2 font-semibold">Window Tint</span>}
+        {<span className="ml-2 lg:block hidden font-semibold">Window Tint</span>}
       </Button>
 
-      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
@@ -159,14 +157,12 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
         />
       )}
 
-      {/* Sidebar */}
       <div className={cn(
         "fixed top-0 left-0 h-full bg-color-picker border-r border-border shadow-2xl z-50 transition-transform duration-300 ease-out overflow-y-auto",
-        isMobile ? "w-full" : "w-96",
+         "w-96",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6 space-y-6">
-          {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Car className="h-6 w-6 text-primary" />
@@ -182,7 +178,6 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
             </Button>
           </div>
 
-          {/* Tint Type Selector */}
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-black uppercase tracking-wide">
               Tint Type
@@ -209,14 +204,14 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
           {/* Window Controls */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger 
-                value="windows" 
+              <TabsTrigger
+                value="windows"
                 className={cn(activeTab === 'windows' ? '!bg-[#9B000E] !text-white' : 'text-black')}
               >
                 Side Windows
               </TabsTrigger>
-              <TabsTrigger 
-                value="windshield" 
+              <TabsTrigger
+                value="windshield"
                 className={cn(activeTab === 'windshield' ? '!bg-[#9B000E] !text-white' : 'text-black')}
               >
                 Windshields

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import TokenGuard from "@/components/TokenGuard";
 import { Suspense } from "react";
 import { Analytics } from '@vercel/analytics/react'; // ✅ Use this for Vite
+import { CarCustomizationLoader } from "./components/ui/withLoading";
 
 const AppRoutes = () => useRoutes(routes);
 
@@ -15,7 +16,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <TokenGuard>
-          <Suspense fallback={<div>Loading route...</div>}>
+          <Suspense fallback={<CarCustomizationLoader message="🎨 Loading Routes..." />}>
             <AppRoutes />
           </Suspense>
         </TokenGuard>
