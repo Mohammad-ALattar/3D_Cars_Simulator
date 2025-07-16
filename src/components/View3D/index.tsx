@@ -75,19 +75,29 @@ const View3DComp = () => {
             onSelectColor={setCarColor}
           />
         </div>
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2  z-10">
+        <div className="fixed flex gap-4 bottom-6  items-center left-1/2 transform -translate-x-1/2  z-10">
+          <WindowTintSelector
+            frontTintPercent={frontTintPercent}
+            backTintPercent={backTintPercent}
+            frontSideTintPercent={frontSideTintPercent}
+            rearSideTintPercent={rearSideTintPercent}
+            tintType={tintType}
+            ppfOption={ppfOption}
+            carColor={carColor}
+            vehicleType={vehicleType}
+          />
           <Button
             variant="secondary"
             size="sm"
             onClick={() => setAutoRotate(!autoRotate)}
-            className="rounded-full w-12 h-12 p-0 shadow-lg bg-white/90 backdrop-blur-sm border border-gray-200"
+            className="rounded-full  w-12 lg:w-16 h-12 p-0 shadow-lg bg-white/90 backdrop-blur-[2px] border border-gray-200"
             title={autoRotate ? "Pause rotation" : "Start rotation"}
           >
             {autoRotate ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
           </Button>
         </div>
         <div className="relative">
-          <div className="absolute top-4 right-4 z-20">
+          <div className="absolute top-4  left-4 z-20">
             <div className='flex flex-col gap-8 '>
               <div className='hidden lg:block'>
                 <ColorPickerSidebar
@@ -95,30 +105,19 @@ const View3DComp = () => {
                   onSelectColor={setCarColor}
                 />
               </div>
-              <WindowTintSelector
+              <WindowTintSidebar
                 frontTintPercent={frontTintPercent}
                 backTintPercent={backTintPercent}
                 frontSideTintPercent={frontSideTintPercent}
                 rearSideTintPercent={rearSideTintPercent}
                 tintType={tintType}
-                ppfOption={ppfOption}
-                carColor={carColor}
-                vehicleType={vehicleType}
+                onFrontTintChange={setFrontTintPercent}
+                onBackTintChange={setBackTintPercent}
+                onFrontSideTintChange={setFrontSideTintPercent}
+                onRearSideTintChange={setRearSideTintPercent}
+                onTintTypeChange={setTintType}
               />
             </div>
-
-            <WindowTintSidebar
-              frontTintPercent={frontTintPercent}
-              backTintPercent={backTintPercent}
-              frontSideTintPercent={frontSideTintPercent}
-              rearSideTintPercent={rearSideTintPercent}
-              tintType={tintType}
-              onFrontTintChange={setFrontTintPercent}
-              onBackTintChange={setBackTintPercent}
-              onFrontSideTintChange={setFrontSideTintPercent}
-              onRearSideTintChange={setRearSideTintPercent}
-              onTintTypeChange={setTintType}
-            />
           </div>
         </div>
       </div>

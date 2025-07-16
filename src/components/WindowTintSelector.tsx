@@ -89,8 +89,7 @@ export default function WindowTintSelector({
 
         >
           <p className='relative z-10 text-[#18181B] text-[14px] font-bold'>
-
-            Submit Selection
+            Submit Request
           </p>
         </Button>
         <ModalSubmitSelection
@@ -111,12 +110,12 @@ export default function WindowTintSelector({
       </div>
       <button
         onClick={() => setModalOpen(true)}
-        className=" bottom-4  py-4 gap-2  flex items-center justify-center max-lg:p-4  rounded-full lg:rounded-lg bg-yellow-300 shadow-md text-black"
+        className=" bottom-4  py-4 gap-2  flex items-center justify-center max-lg:p-4 lg:w-full  rounded-full lg:rounded-lg bg-yellow-300 shadow-md text-black"
         aria-label="Tint information"
       >
         <img src="/excemlation-mark.svg" alt="Autobahn" className="w-[20px] h-[20px] " />
         <p className='lg:block hidden text-base'>
-          Submit Selection
+          Submit Request
         </p>
       </button>
     </>

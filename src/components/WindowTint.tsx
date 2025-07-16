@@ -19,10 +19,10 @@ interface WindowTintSidebarProps {
 }
 
 const tintTypes = [
-  { id: 'black-vlt', label: 'BLACK VLT\'S', short: 'BLACK' },
-  { id: 'black-ceramic', label: 'BLACK CERAMIC VLT\'S', short: 'CERAMIC' },
-  { id: 'i3-ceramic', label: 'I3 CERAMIC VLT\'S', short: 'I3' },
-  { id: 'air-ceramic', label: 'AIR CERAMIC VLT', short: 'AIR' }
+  { id: 'black-vlt', label: 'BLACK' },
+  { id: 'black-ceramic', label: 'BLACK CERAMIC' },
+  { id: 'i3-ceramic', label: 'I3' },
+  { id: 'air-ceramic', label: 'AIR' }
 ];
 
 const tintMarkers = [5, 20, 35, 50, 70, 100];
@@ -139,7 +139,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
       <Button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "group fixed z-50 border-border  hover:bg-transparent bg-color-picker rounded-full border border-color-picker-border shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "group max-lg:fixed z-50 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
           "max-lg:bottom-4 left-4 max-lg:w-14 max-lg:h-14",
           "lg:left-6 lg:p-6"
         )}
@@ -152,14 +152,14 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
 
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/50 z-50 backdrop-blur-[2px]"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       <div className={cn(
         "fixed top-0 left-0 h-full bg-color-picker border-r border-border shadow-2xl z-50 transition-transform duration-300 ease-out overflow-y-auto",
-         "w-96",
+        "w-96",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-6 space-y-6">
@@ -194,8 +194,8 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                       : 'bg-[#f1f1f1] text-black !border-[#18181B]  hover:bg-gray-200'
                   )}
                 >
-                  <div className="text-xs font-bold">{type.short}</div>
-                  <div className="text-[10px] opacity-80 mt-1">{type.label.split(' ').slice(-1)[0]}</div>
+                  {/* <div className="text-xs font-bold">{type.short}</div> */}
+                  <div className="text-[10px] font-bold text-xs opacity-80 mt-1">{type.label}</div>
                 </button>
               ))}
             </div>
