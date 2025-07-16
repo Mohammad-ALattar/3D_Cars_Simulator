@@ -31,7 +31,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
     },
     {
       id: 'purple',
-      name: 'Silver',
+      name: 'Purple',
       hex: '#D5D1CC',
       svg: '/vehicle-colors/move.svg',
     },
@@ -70,24 +70,23 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
 
   return (
     <>
-      {/* Backdrop */}
       {isOpen && (
-        <div 
-          className="fixed inset-0  bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300"
+        <div
+          className="fixed inset-0  bg-black/30 backdrop-blur-[2px] z-40 transition-opacity duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       <button
         onClick={() => setIsOpen(true)}
-        className="group  relative bg-color-picker  border border-color-picker-border rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="group  relative border-2 border-white  rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20"
         aria-label="Open color picker"
       >
         <div className="flex items-center gap-3">
           <div className="relative">
             <Palette className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
             {selectedColorData && (
-              <div 
+              <div
                 className="absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-background"
                 style={{ backgroundColor: selectedColorData.hex }}
               />
@@ -105,9 +104,8 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
       </button>
 
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex items-center justify-between p-6 border-b border-color-picker-border">
           <div>
@@ -130,11 +128,11 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
               <button
                 key={color.id}
                 onClick={() => handleColorSelect(color.id)}
-                className={`group relative p-4 rounded-xl border-2 transition-all duration-200 focus:outline-none ${
-                  selectedColor === color.id
+                className={`group relative p-4 rounded-xl border-2 transition-all duration-200 focus:outline-none ${selectedColor === color.id
                     ? 'border-primary bg-color-picker-accent'
-                    : 'border-color-picker-border bg-background hover:border-primary/30 hover:bg-color-picker-hover'
-                }`}
+                    : ` bg-background hover:border-primary/30 hover:bg-color-picker-hover`
+                  }`}
+                style={selectedColor === color.id ? { borderColor: color.hex } : {}}
                 aria-label={`Select ${color.name} color`}
               >
                 <div className="flex flex-col items-center gap-3">
@@ -142,11 +140,11 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
                     <img
                       src={color.svg}
                       alt={color.name}
-                      className="w-12 h-12 transition-transform group-hover:scale-110"
+                      className="w-9 h-9 transition-transform group-hover:scale-110"
                     />
                     {selectedColor === color.id && (
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div 
+                        <div
                           className="w-full h-full rounded-full border-2"
                           style={{ borderColor: color.hex }}
                         />
@@ -155,7 +153,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
                   </div>
                   <div className="text-center">
                     <p className="text-sm font-medium text-foreground">{color.name}</p>
-                    <div 
+                    <div
                       className="w-6 h-2 rounded-full mx-auto mt-1 border border-border"
                       style={{ backgroundColor: color.hex }}
                     />
