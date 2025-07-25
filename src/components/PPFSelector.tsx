@@ -40,20 +40,31 @@ const PPFSelector: React.FC<PPFSelectorProps> = ({
   ];
 
   return (
-    <div className="w-full">
-      <Button
-        className="text-center !bg-transparent w-full text-sm uppercase tracking-wider text-[11px] md:text-[13px] text-[#000] font-bold mb-2 flex items-center justify-center gap-1"
+    <div className="w-full md:max-w-2xl md:mx-auto">
+      <div
+        className="bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-150 border border-gray-200 rounded-lg p-3 cursor-pointer transition-all duration-300 hover:shadow-lg group"
         onClick={() => setExpanded(!expanded)}
       >
-        PAINT PROTECTION FILM (PPF) KITS
-        {expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-      </Button>
+        <div className="flex items-center justify-between">
+          <h3 className="text-sm md:text-base font-bold text-gray-800 uppercase tracking-wide">
+            Paint Protection Film (PPF) Kits
+          </h3>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500 hidden md:inline">
+              {expanded ? 'Click to collapse' : 'Click to expand'}
+            </span>
+            <div className={`p-1 rounded-full bg-[#9B000E] text-white transition-transform duration-300 ${expanded ? 'rotate-180' : 'rotate-0'} group-hover:scale-110`}>
+              <ChevronDown size={16} />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className={cn(
-        "overflow-hidden transition-all duration-300 ease-in-out",
+        "overflow-hidden transition-all duration-300 ease-in-out mt-3",
         expanded ? "max-h-[200px] opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className="flex gap-4 justify-center flex-wrap pb-4">
+        <div className="flex gap-1 justify-center  pb-4">
           {options.map((option) => (
             <Button
               key={option.id}
