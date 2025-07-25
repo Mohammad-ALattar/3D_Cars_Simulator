@@ -4,12 +4,12 @@ export const CarCustomizationLoader = ({ message = "Loading..." }) => {
     <div className="fixed inset-0 bg-gradient-to-br from-[#9B000E] via-black to-black flex items-center justify-center z-50">
       <div className="text-center">
         <div className="relative mb-8">
-          <div className=" mx-auto mb-4 text-center relative">
-            <div className="absolute inset-0 rounded-full  opacity-30"></div>
-            <div className="absolute inset-0 rounded-full   via-black to-black opacity-40 animate-pulse"></div>
+          <div className="mx-auto mb-4 text-center relative flex justify-center">
+            <div className="absolute inset-0 rounded-full opacity-30"></div>
+            <div className="absolute inset-0 rounded-full via-black to-black opacity-40 animate-pulse"></div>
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent to-white opacity-20 animate-ping"></div>
 
-            <img src="/autobhanTransparent.gif" alt="Car Loader" className="w-[200px] justify-self-center h-[200px] rounded-full" />
+            <img src="/autobhanTransparent.gif" alt="Car Loader" className="w-[200px] h-[200px] rounded-full mx-auto" />
           </div>
         </div>
 
