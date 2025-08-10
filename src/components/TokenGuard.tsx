@@ -16,12 +16,12 @@ export default function TokenGuard({ children }) {
 
   if (!token) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-[#9B000E] via-black to-black flex items-center justify-center z-50">
+      <div className="fixed inset-0  flex items-center justify-center z-50">
         <div className="text-center">
-          <div className="text-white text-xl font-medium tracking-wide mb-4">
+          <div className="bg-gradient-to-l to-[#9B000E] from-black text-transparent bg-clip-text text-xl font-medium tracking-wide mb-4">
             🔒 Access Required
           </div>
-          <div className="text-red-300 text-sm font-mono">
+          <div className="bg-gradient-to-l to-[#9B000E] from-black text-transparent bg-clip-text text-sm ">
             MISSING TOKEN
           </div>
         </div>
@@ -35,12 +35,12 @@ export default function TokenGuard({ children }) {
 
   if (isError || !data?.verified) {
     return (
-      <div className="fixed inset-0 bg-gradient-to-br from-[#9B000E] via-black to-black flex items-center justify-center z-50">
+      <div className="fixed inset-0  flex items-center justify-center z-50">
         <div className="text-center">
-          <div className="text-white text-xl font-medium tracking-wide mb-4">
+          <div className="bg-gradient-to-l to-[#9B000E] from-black text-transparent bg-clip-text text-xl font-medium tracking-wide mb-4">
             ❌ Access Denied
           </div>
-          <div className="text-red-300 text-sm font-mono">
+          <div className="bg-gradient-to-l to-[#9B000E] from-black text-transparent bg-clip-text text-sm ">
             INVALID TOKEN
           </div>
         </div>
