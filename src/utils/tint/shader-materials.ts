@@ -59,13 +59,13 @@ export const createSideWindowShaderMaterial = (
 
         // Add subtle glass-like effects
         vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
-        float fresnel = 5.0 - abs(dot(vNormal, viewDirection));
+        float fresnel = .0 - abs(dot(vNormal, viewDirection));
         
         // Mix base color with slight blue tint for glass effect
-        vec3 glassColor = mix(baseColor, vec3(0.1, 0, 0), 0.6);
-        
+        vec3 glassColor = mix(baseColor, vec3(0.1, 0, 0), 0.2);
+
         // Add fresnel reflection
-        vec3 finalColor = mix(glassColor, vec3(0.8, 0.9, 1.0), fresnel * 0.1);
+        vec3 finalColor = mix(glassColor, vec3(0.2, 0.9, 1.0), 0.1);
         
         gl_FragColor = vec4(finalColor, opacity);
       }

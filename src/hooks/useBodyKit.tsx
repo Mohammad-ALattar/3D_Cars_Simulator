@@ -9,6 +9,7 @@ interface UseBodyKitProps {
   showPPF: boolean;
   carColor: THREE.Color;
   vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  ppfOtherColor: string;
 }
 
 export const useBodyKit = ({
@@ -16,7 +17,8 @@ export const useBodyKit = ({
   ppfOption,
   showPPF,
   carColor,
-  vehicleType
+  vehicleType,
+  ppfOtherColor
 }: UseBodyKitProps) => {
   const bodyKitMeshes = useRef<THREE.Mesh[]>([]);
   const originalGeometries = useRef<Map<string, THREE.BufferGeometry>>(new Map());
@@ -48,13 +50,14 @@ export const useBodyKit = ({
     });
     bodyKitMeshes.current = [];
 
-    if (showPPF && ppfOption !== 'none') {
-      lastAppliedOption.current = ppfOption;
-      applyBodyKit(scene, ppfOption, originalGeometries.current, carColor, vehicleType);
+    if (showPPF && (ppfOption !== 'none' || ppfOtherColor !== 'none')) {
+      const activePPFOption = ppfOtherColor !== 'none' ? ppfOtherColor : ppfOption;
+      lastAppliedOption.current = activePPFOption;
+      applyBodyKit(scene, ppfOption, originalGeometries.current, carColor, vehicleType, ppfOtherColor);
     } else {
       lastAppliedOption.current = 'none';
     }
-  }, [scene, ppfOption, showPPF, carColor]);
+  }, [scene, ppfOption, ppfOtherColor, showPPF, carColor]); // Added ppfOtherColor to dependencies
 
   return {
     bodyKitMeshes,

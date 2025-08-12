@@ -73,7 +73,7 @@ export default function WindowTintSelector({
               </div>
               <div className="flex gap-6">
                 <span className="font-normal">Film Type : </span>
-                <span className="font-semibold">{tintData.tintType.replace("-", " ").toUpperCase()}</span>
+                <span className="font-semibold">{tintData.tintType.label.toUpperCase() + ' ' + tintData.tintType.subLabel.toUpperCase()}</span>
               </div>
               <div className="flex gap-6">
                 <span className="font-normal">PPF : </span>
@@ -110,11 +110,11 @@ export default function WindowTintSelector({
       </div>
       <button
         onClick={() => setModalOpen(true)}
-        className=" bottom-4  py-4 gap-2  flex items-center justify-center max-lg:p-4 lg:w-full  rounded-full lg:rounded-lg bg-yellow-300 shadow-md text-black"
+        className=" bottom-4  py-4 gap-2  flex items-center justify-center max-lg:p-4 lg:w-full  rounded-lg bg-yellow-300 shadow-md text-black"
         aria-label="Tint information"
       >
         <img src="/excemlation-mark.svg" alt="Autobahn" className="w-[20px] h-[20px] " />
-        <p className='lg:block hidden text-base'>
+        <p className='text-base'>
           Submit Request
         </p>
       </button>

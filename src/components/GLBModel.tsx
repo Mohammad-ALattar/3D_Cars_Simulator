@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import { getCarColor } from '@/utils/tint';
 import { useWindowElements } from '@/hooks/useWindowElements';
 import { useBodyKit } from '@/hooks/useBodyKit';
-import TintUpdater from '@/components/model/TintUpdater';
 
 interface GLBModelProps {
   color: string;
@@ -16,6 +15,7 @@ interface GLBModelProps {
   rearSideTintPercent: number;
   backTintPercent: number;
   vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  ppfOtherColor: string;
 }
 
 const GLBModel: React.FC<GLBModelProps> = ({
@@ -26,11 +26,12 @@ const GLBModel: React.FC<GLBModelProps> = ({
   frontSideTintPercent,
   rearSideTintPercent,
   vehicleType,
-  backTintPercent
+  backTintPercent,
+  ppfOtherColor
 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const modelPath = vehicleType === 'SEDAN'
-    ? "/2020_Porsche_Taycan_LP.glb" : vehicleType === 'PICKUP' ?
+    ? "/Car.glb" : vehicleType === 'PICKUP' ?
       "/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP.glb" : "/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb";
   const { scene } = useGLTF(modelPath);
 
@@ -41,7 +42,8 @@ const GLBModel: React.FC<GLBModelProps> = ({
     ppfOption,
     showPPF,
     carColor,
-    vehicleType
+    vehicleType,
+    ppfOtherColor
   });
 
   useWindowElements({

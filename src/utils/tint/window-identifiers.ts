@@ -1,3 +1,5 @@
+// not used 
+
 export const identifyWindowType = (
   meshName: string
 ): "frontWindshield" | "rearWindow" | "sideWindow" | "other" => {

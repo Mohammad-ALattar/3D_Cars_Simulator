@@ -13,12 +13,13 @@ interface Car3DViewerProps {
   isMobile: boolean;
   backTintPercent: number;
   autoRotate: boolean;
+  ppfOtherColor: string;
 }
 
 const preloadModel = (vehicleType: string) => {
   switch (vehicleType) {
     case "SEDAN":
-      useGLTF.preload("/2020_Porsche_Taycan_LP.glb");
+      useGLTF.preload("/Car.glb");
       break;
     case "SUV":
       useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb");
@@ -27,7 +28,7 @@ const preloadModel = (vehicleType: string) => {
       useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP.glb");
       break;
     default:
-      useGLTF.preload("/2020_Porsche_Taycan_LP.glb");
+      useGLTF.preload("/Car.glb");
   }
 };
 
@@ -40,17 +41,17 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
   rearSideTintPercent,
   isMobile,
   backTintPercent,
-  autoRotate
+  autoRotate,
+  ppfOtherColor
 }) => {
   const [showPPF, setShowPPF] = useState(true);
-
   useEffect(() => {
     preloadModel(vehicleType);
 
-    if (ppfOption !== 'none') {
+    if (ppfOption !== 'none' || ppfOtherColor !== 'none') {
       setShowPPF(true);
     }
-  }, [vehicleType, ppfOption]);
+  }, [vehicleType, ppfOption, ppfOtherColor]);
 
 
   const cameraSettings = {
@@ -95,7 +96,8 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
             vehicleType={vehicleType}
             color={color}
             ppfOption={ppfOption}
-            showPPF={showPPF && ppfOption !== 'none'}
+            ppfOtherColor={ppfOtherColor}
+            showPPF={showPPF && (ppfOption !== 'none' || ppfOtherColor !== 'none')}
             backTintPercent={backTintPercent}
             frontTintPercent={frontTintPercent}
             frontSideTintPercent={frontSideTintPercent}
