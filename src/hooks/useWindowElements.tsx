@@ -68,7 +68,7 @@ export const useWindowElements = ({
             originalMaterials.current.set(child, child.material.clone());
           }
 
-          if (meshName === "Left_Door_Glass_Glass_0" || meshName === "Right_Door_Glass_Glass_0") {
+          if (meshName === "Glass_Side_Front") {
             // Front side windows
             windowElements.current.sideWindows?.push(child);
             foundWindows.current.sideWindows.push(meshName);
@@ -76,7 +76,7 @@ export const useWindowElements = ({
             return;
           }
 
-          if (meshName === "Glass_Glass_0") {
+          if (meshName === "Glass_Side_back" || meshName === "Glass_Back") {
             // Rear side windows
             windowElements.current.sideWindows?.push(child);
             foundWindows.current.sideWindows.push(meshName);
@@ -84,7 +84,7 @@ export const useWindowElements = ({
             return;
           }
 
-          if (meshName === "Body-GlassWindsTexture003") {
+          if (meshName === "Glass_Front") {
             windowElements.current.sideWindows?.push(child);
             foundWindows.current.sideWindows.push(meshName);
             child.material = createSideWindowShaderMaterial(frontTintPercent, frontTintPercent);

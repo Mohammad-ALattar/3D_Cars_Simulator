@@ -243,7 +243,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
               {tintTypes.map((type) => (
                 <button
                   key={type.id}
-                  onClick={() => handleTintTypeChange(type.id , type.label , type.subLabel)}
+                  onClick={() => handleTintTypeChange(type.id, type.label, type.subLabel)}
                   className={cn(
                     "p-3 rounded-lg border text-center transition-all duration-300 hover:scale-105 hover:shadow-lg",
                     tintType.id === type.id
@@ -352,18 +352,15 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
       </div>
 
       {/* Specification Card - Outside Sidebar */}
-      {showSpecCard && (
-        <div className="fixed inset-0 flex items-center justify-center z-60 pointer-events-none">
+      {isOpen  && showSpecCard && (
+        <div className="fixed inset-0  flex items-center justify-center lg:right-8 lg:top-14 lg:justify-end lg:z-50 pointer-events-none">
           <div className="pointer-events-auto">
             <div className={cn(
               "relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br w-96 max-w-[90vw]",
               currentSpec?.gradient,
               "border border-white/20 animate-in fade-in slide-in-from-bottom-10 "
             )}>
-              {/* Animated background effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10 animate-pulse"></div>
-
-              {/* Close button */}
               <button
                 onClick={() => setShowSpecCard(false)}
                 className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-200 flex items-center justify-center hover:scale-110"
@@ -383,12 +380,12 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className=" gap-2 grid grid-cols-2 justify-items-center">
                   {currentSpec?.specs.map((spec, index) => (
                     <div
                       key={index}
                       className={cn(
-                        "flex items-center gap-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300",
+                        "flex flex-col justify-center items-center gap-2 p-2 h-full w-full  rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 transition-all duration-300",
                         "hover:bg-white/20 hover:scale-105 hover:shadow-lg"
                       )}
                       style={{
@@ -396,16 +393,16 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                         animation: showSpecCard ? 'slideInFromLeft 0.6s ease-out forwards' : 'none'
                       }}
                     >
-                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center ">
                         {spec.icon}
                       </div>
-                      <div className="flex-1">
+                      <div className="text-center">
                         <p className="font-semibold text-base mb-1">{spec.label}</p>
                         <p className="text-white/90 text-sm font-medium">{spec.value}</p>
                       </div>
                     </div>
                   ))}
-                </div>               
+                </div>
                 {/* Premium badge */}
                 <div className="absolute -top-2 -right-2 w-20 h-20 bg-white/10 rounded-full animate-spin" style={{ animationDuration: '20s' }}>
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
