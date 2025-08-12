@@ -51,19 +51,20 @@ class MaterialCache {
   getPPFMaterialWithCustomColor(
     color: THREE.Color
   ): THREE.MeshPhysicalMaterial {
-    const key = `ppf_custom_${color.getHexString()}`;
+    const key = "ppf_gray";
+
     return this.getMaterial(key, {
-      color: color.clone(),
-      metalness: 0.9,
-      roughness: 0 ,
-      clearcoat: 0,
-      clearcoatRoughness: 0.03,
-      reflectivity: 1.0,
-      envMapIntensity: 0.6,
+      color: new THREE.Color(0x808080),
+      metalness: 0.0,
+      roughness: 0.05,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.0,
+      reflectivity: 0.8,
+      envMapIntensity: 0.8,
       transparent: false,
       opacity: 0.5,
-      transmission: 0,
-      ior: 0.5,
+      transmission: 0.05,
+      ior: 1.4,
     });
   }
 
@@ -101,6 +102,12 @@ const BODY_PART_KEYWORDS = new Set([
   "trunk",
   "rearwing",
   "steps_part_object016001",
+  "ppf-1",
+  "ppf-2",
+  "boot_ok_leather_0_5",
+  "boot_ok_leather_0_2",
+  "boot_ok_leather_0_4",
+  "boot_ok_leather_0_3",
 ]);
 
 const FRONT_PARTS_MAP = {
@@ -118,20 +125,13 @@ const FRONT_PARTS_MAP = {
     "bumper_part_f2",
     "body_front_wing-3",
   ]),
-  SEDAN: new Set([
-    // 'carpaint_front-1',
-    // 'carpaint_front-2',
-    // 'doorfrright-carpaint-1',
-    // 'doorfrleft-carpaint-1',
-    "hood_body_color_0",
-    "front_bumper_body_color_0",
-  ]),
+  SEDAN: new Set(["ppf-1", "ppf-2"]),
 } as const;
 
 const PARTIAL_FRONT_PARTS_MAP = {
   SUV: new Set(["fender_front_part_object011003", "hood"]),
   PICKUP: new Set(["body_front_wing-2", "body_part3", "bumper_part_f2"]),
-  SEDAN: new Set(["front_bumper_body_color_0"]),
+  SEDAN: new Set(["ppf-1"]),
 } as const;
 
 export const isBodyPart = (name: string): boolean => {
