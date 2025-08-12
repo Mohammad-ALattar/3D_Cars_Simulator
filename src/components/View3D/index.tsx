@@ -29,15 +29,15 @@ export default View3D;
 const View3DComp = () => {
   const [vehicleType, setVehicleType] = useState<"SEDAN" | "SUV" | "PICKUP">('SEDAN');
   const [ppfOption, setPpfOption] = useState('none');
-  const [tintType, setTintType] = useState('black-vlt');
-  const [frontTintPercent, setFrontTintPercent] = useState(0);
-  const [backTintPercent, setBackTintPercent] = useState(0);
-  const [frontSideTintPercent, setFrontSideTintPercent] = useState(0);
-  const [rearSideTintPercent, setRearSideTintPercent] = useState(0);
+  const [ppfOtherColor, setPpfOtherColor] = useState('none');
+  const [tintType, setTintType] = useState({ id: 'black-vlt', label: 'STANDARD', subLabel: 'Black' });
+  const [frontTintPercent, setFrontTintPercent] = useState(100);
+  const [backTintPercent, setBackTintPercent] = useState(100);
+  const [frontSideTintPercent, setFrontSideTintPercent] = useState(100);
+  const [rearSideTintPercent, setRearSideTintPercent] = useState(100);
   const [carColor, setCarColor] = useState('red');
   const isMobile = useIsMobile();
   const [autoRotate, setAutoRotate] = useState(false);
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -51,6 +51,8 @@ const View3DComp = () => {
             <PPFSelector
               selectedOption={ppfOption}
               onSelectOption={setPpfOption}
+              selectedOtherPPFColor={ppfOtherColor}
+              onSelectOtherPPFColor={setPpfOtherColor}
             />
           </div>
         </div>
@@ -67,6 +69,7 @@ const View3DComp = () => {
             rearSideTintPercent={rearSideTintPercent}
             isMobile={!!isMobile}
             autoRotate={autoRotate}
+            ppfOtherColor={ppfOtherColor}
           />
         </div>
         <div className="absolute bottom-4  lg:hidden right-0 z-30 px-4 ">
@@ -90,7 +93,7 @@ const View3DComp = () => {
             variant="secondary"
             size="sm"
             onClick={() => setAutoRotate(!autoRotate)}
-            className="rounded-full  w-12 lg:w-16 h-12 p-0 shadow-lg bg-white/90 backdrop-blur-[2px] border border-gray-200"
+            className="rounded-full max-md:hidden  w-12 lg:w-16 h-12 p-0 shadow-lg bg-white/90 backdrop-blur-[2px] border border-gray-200"
             title={autoRotate ? "Pause rotation" : "Start rotation"}
           >
             {autoRotate ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}

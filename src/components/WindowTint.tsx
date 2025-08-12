@@ -9,12 +9,12 @@ interface WindowTintSidebarProps {
   frontSideTintPercent: number;
   rearSideTintPercent: number;
   backTintPercent: number;
-  tintType: string;
+  tintType: { id: string; label: string; subLabel: string };
   onFrontTintChange: (value: number) => void;
   onFrontSideTintChange: (value: number) => void;
   onRearSideTintChange: (value: number) => void;
   onBackTintChange: (value: number) => void;
-  onTintTypeChange: (type: string) => void;
+  onTintTypeChange: ({ id, label, subLabel }: { id: string; label: string; subLabel: string }) => void;
 }
 
 const tintTypes = [
@@ -26,7 +26,8 @@ const tintTypes = [
 
 const tintSpecs = {
   'black-vlt': {
-    title: 'STANDARD Black',
+    title: 'STANDARD',
+    subTitle: 'Black',
     specs: [
       { icon: <Shield className="w-4 h-4" />, label: 'UV Rejection', value: '> 99%' },
       { icon: <Sun className="w-4 h-4" />, label: 'Heat Rejection (TSER)', value: '30–43%' },
@@ -37,7 +38,8 @@ const tintSpecs = {
     gradient: 'from-gray-600 to-gray-800'
   },
   'black-ceramic': {
-    title: 'PREMIUM Black Ceramic',
+    title: 'PREMIUM',
+    subTitle: 'Black Ceramic',
     specs: [
       { icon: <Shield className="w-4 h-4" />, label: 'UV Rejection', value: '> 99%' },
       { icon: <Sun className="w-4 h-4" />, label: 'Heat Rejection (TSER)', value: '50–63%' },
@@ -48,7 +50,8 @@ const tintSpecs = {
     gradient: 'from-blue-600 to-blue-800'
   },
   'i3-ceramic': {
-    title: 'PREMIUM+ Ceramic I3',
+    title: 'PREMIUM PLUS',
+    subTitle: 'Ceramic I3',
     specs: [
       { icon: <Shield className="w-4 h-4" />, label: 'UV Rejection', value: '> 99%' },
       { icon: <Sun className="w-4 h-4" />, label: 'Heat Rejection (TSER)', value: '56–71%' },
@@ -59,7 +62,8 @@ const tintSpecs = {
     gradient: 'from-purple-600 to-purple-800'
   },
   'air-ceramic': {
-    title: 'ADVANCED Ceramic I3+',
+    title: 'ADVANCED',
+    subTitle: 'Ceramic I3 Plus',
     specs: [
       { icon: <Shield className="w-4 h-4" />, label: 'UV Rejection', value: '> 99%' },
       { icon: <Sun className="w-4 h-4" />, label: 'IR Rejection', value: 'High 90%+' },
@@ -95,8 +99,9 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
     });
   };
 
-  const handleTintTypeChange = (type: string) => {
-    onTintTypeChange(type);
+  const handleTintTypeChange = (type: string, label: string, subLabel: string) => {
+    console.log(type, label, subLabel);
+    onTintTypeChange({ id: type, label, subLabel });
     setShowSpecCard(true);
   };
 
@@ -131,7 +136,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
             <Button
               size="sm"
               variant="outline"
-              onClick={() => onChange(5)}
+              onClick={() => onChange(100)}
               className="h-6 px-2 text-xs"
             >
               Clear
@@ -185,7 +190,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
     );
   };
 
-  const currentSpec = tintSpecs[tintType as keyof typeof tintSpecs];
+  const currentSpec = tintSpecs[tintType.id as keyof typeof tintSpecs];
 
   return (
     <>
@@ -238,10 +243,10 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
               {tintTypes.map((type) => (
                 <button
                   key={type.id}
-                  onClick={() => handleTintTypeChange(type.id)}
+                  onClick={() => handleTintTypeChange(type.id , type.label , type.subLabel)}
                   className={cn(
                     "p-3 rounded-lg border text-center transition-all duration-300 hover:scale-105 hover:shadow-lg",
-                    tintType === type.id
+                    tintType.id === type.id
                       ? 'bg-[#9B000E] text-white border-[#9B000E] shadow-lg transform scale-105'
                       : 'bg-[#f1f1f1] text-black !border-[#18181B] hover:bg-gray-200'
                   )}
@@ -322,10 +327,10 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                 variant="outline"
                 size="sm"
                 onClick={() => {
-                  onFrontSideTintChange(5);
-                  onRearSideTintChange(5);
-                  onFrontTintChange(5);
-                  onBackTintChange(5);
+                  onFrontSideTintChange(100);
+                  onRearSideTintChange(100);
+                  onFrontTintChange(100);
+                  onBackTintChange(100);
                 }}
                 className="text-xs font-bold hover:scale-105 transition-transform"
               >
@@ -373,6 +378,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold mb-1">{currentSpec?.title}</h3>
+                    <p className="text-2xl font-bold mb-1">{currentSpec?.subTitle}</p>
                     <p className="text-white/80 text-sm">Premium Protection Specifications</p>
                   </div>
                 </div>
@@ -399,16 +405,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
                       </div>
                     </div>
                   ))}
-                </div>
-
-                {/* Animated bottom accent */}
-                <div className="mt-8 h-2 w-full bg-white/20 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-white rounded-full transition-all duration-1500 ease-out shadow-lg"
-                    style={{ width: showSpecCard ? '100%' : '0%' }}
-                  ></div>
-                </div>
-
+                </div>               
                 {/* Premium badge */}
                 <div className="absolute -top-2 -right-2 w-20 h-20 bg-white/10 rounded-full animate-spin" style={{ animationDuration: '20s' }}>
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">

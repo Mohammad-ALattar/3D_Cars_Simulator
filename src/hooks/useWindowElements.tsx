@@ -68,7 +68,7 @@ export const useWindowElements = ({
             originalMaterials.current.set(child, child.material.clone());
           }
 
-          if (meshName === "Body-GlassWindsTexture001" || meshName === "Body-GlassWindsTexture002") {
+          if (meshName === "Left_Door_Glass_Glass_0" || meshName === "Right_Door_Glass_Glass_0") {
             // Front side windows
             windowElements.current.sideWindows?.push(child);
             foundWindows.current.sideWindows.push(meshName);
@@ -76,8 +76,7 @@ export const useWindowElements = ({
             return;
           }
 
-          if (meshName === "Body-GlassWindsTexture005_2" || meshName === "Body-GlassWindsTexture006" ||
-            meshName === "Body-GlassWindsTexture007" || meshName === "Body-GlassWindsTexture004" || meshName === "Body-GlassWindsTexture") {
+          if (meshName === "Glass_Glass_0") {
             // Rear side windows
             windowElements.current.sideWindows?.push(child);
             foundWindows.current.sideWindows.push(meshName);

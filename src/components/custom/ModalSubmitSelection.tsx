@@ -41,7 +41,7 @@ export type TintData = {
   backTintPercent: number;
   frontSideTintPercent: number;
   rearSideTintPercent?: number;
-  tintType: string;
+  tintType: { id: string; label: string; subLabel: string };
   ppfOption: string;
   carColor: string;
   vehicleType: "SEDAN" | "SUV" | "PICKUP"
@@ -101,7 +101,7 @@ export default function ModalSubmitSelection({
         make: data.make,
         model: data.model,
         tintType: (() => {
-          switch (tintData.tintType) {
+          switch (tintData.tintType.id) {
             case "black-ceramic": return 2;
             case "i3-ceramic": return 3;
             case "air-ceramic": return 4;
@@ -185,16 +185,16 @@ export default function ModalSubmitSelection({
                   <span className="font-semibold">{tintData.vehicleType}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:gap-6">
-                  <span className="font-normal min-w-fit">Front Windows:</span>
+                  <span className="font-normal min-w-fit">Front Two Windows:</span>
                   <span className="font-semibold">{tintData.frontSideTintPercent}%</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:gap-6">
-                  <span className="font-normal min-w-fit">REAR Windows:</span>
+                  <span className="font-normal min-w-fit">REAR Three Windows:</span>
                   <span className="font-semibold">{tintData.rearSideTintPercent}%</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:gap-6">
                   <span className="font-normal min-w-fit">Film Type:</span>
-                  <span className="font-semibold">{tintData.tintType.replace("-", " ").toUpperCase()}</span>
+                  <span className="font-semibold">{tintData.tintType.label.toUpperCase() + ' ' + tintData.tintType.subLabel.toUpperCase()}</span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:gap-6">
                   <span className="font-normal min-w-fit">PPF:</span>
