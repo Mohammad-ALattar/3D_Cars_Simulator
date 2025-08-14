@@ -112,25 +112,22 @@ const BODY_PART_KEYWORDS = new Set([
 
 const FRONT_PARTS_MAP = {
   SUV: new Set([
-    "fender_front_part_object011003",
-    "rear_view_mirror_body",
-    "fender_front_part_object011003-2",
-    "fender_front_part_object012001",
-    "fender_front_part_object015002",
-    "body_part",
+  "ppf-1",
+  "ppf-2",
+  "rear_view_mirror_body"
   ]),
+
   PICKUP: new Set([
-    "body_front_wing-2",
-    "body_part3",
-    "bumper_part_f2",
-    "body_front_wing-3",
+    "ppf-2" , "body_part4_1", "ppf-3" , "body_part4"  , "side_backward_mirror" , "detail_door_handle_side"
   ]),
   SEDAN: new Set(["ppf-1", "ppf-2"]),
 } as const;
 
 const PARTIAL_FRONT_PARTS_MAP = {
-  SUV: new Set(["fender_front_part_object011003", "hood"]),
-  PICKUP: new Set(["body_front_wing-2", "body_part3", "bumper_part_f2"]),
+  SUV: new Set([
+  "ppf-1"
+  ]),
+  PICKUP: new Set(["body_part4_1" , "body_part4" ]),
   SEDAN: new Set(["ppf-1"]),
 } as const;
 
@@ -145,6 +142,7 @@ const isFrontPart = (
   name: string,
   vehicleType: "SEDAN" | "SUV" | "PICKUP"
 ): boolean => {
+    console.log(name , "name")
   const lowerName = name.toLowerCase();
   return Array.from(FRONT_PARTS_MAP[vehicleType]).some((part) =>
     lowerName.includes(part)
@@ -155,6 +153,7 @@ const isPartialFrontPart = (
   name: string,
   vehicleType: "SEDAN" | "SUV" | "PICKUP"
 ): boolean => {
+  console.log(name , "name")
   const lowerName = name.toLowerCase();
   return Array.from(PARTIAL_FRONT_PARTS_MAP[vehicleType]).some((part) =>
     lowerName.includes(part)
@@ -265,7 +264,7 @@ const MATERIAL_RULES = [
   },
   {
     pattern:
-      /doorfrleft-metaldark|Front_Bumper_Splitter_0|Left_Door_Mirror_0|Rear_Bumper_Black_Metal_0|Rear_Bumper_Painted_Black_0|Right_Door_Mirror_0001|Left_Door_Black_0|Hood_Gray_0|Hood_Grille_0|Front_Bumper_Grille_0|Front_Bumper_Painted_Black_0|Front_Left_Wheel_Tire_Sidewall_0|Rear_Left_Wheel_Tire_Sidewall_0|body-plasticblack|body-glasslights|glasslights|metaldark|body-black|body-rubber|intburmestergrid|logo_side02|bumper_part_f1|bumper_part_f3|bumper_part_f4|detail_fastener|body_front_bumper_part1|body_front_bumper|halogen_body05|body_part5|side_backward_mirror|detail_door_handle_side|body_rear_wing_part|body_front_wing_part|body_parts_underbody|detail_antenna_part|bumper_front_part_014|bumper_front_part_028|bumper_front_part_018|bumper_front_part_006|bumper_front_part_009|bumper_front_part_031|bumper_front_part_015|tire_wheel_trunk_005001|tire_wheel_trunk_007004|tire_wheel_trunk_009005|tire_wheel_trunk_004003|tire_wheel_trunk_01002|trunk_handle|door_handle|roof|cleaner|hood_grill_part_object003001|hood_grill_part_object005003|hood_grid|hood_grill_part_object055002|rear_view_mirror_body|hood_part_03|bumper_rear_part_object036001|pipe|bumper_rear_part_torus002005|bumper_rear_part_object044003|bumper_rear_part_object043006|bumper_front_part_024|trunk_part|door_part/i,
+      /doorfrleft-metaldark|body_front_wing_part|body_part1|bumper_part_f|body_part2|Front_Bumper_Splitter_0|Rear_Bumper_Black_Metal_0|Rear_Bumper_Painted_Black_0|Right_Door_Mirror_0001|Left_Door_Black_0|Hood_Gray_0|Hood_Grille_0|Front_Bumper_Grille_0|Front_Bumper_Painted_Black_0|Front_Left_Wheel_Tire_Sidewall_0|Rear_Left_Wheel_Tire_Sidewall_0|body-plasticblack|body-glasslights|glasslights|metaldark|body-black|body-rubber|intburmestergrid|logo_side02|bumper_part_f1|bumper_part_f3|bumper_part_f4|detail_fastener|body_front_bumper_part1|body_front_bumper|halogen_body05|body_part5|body_rear_wing_part|body_parts_underbody|detail_antenna_part|bumper_front_part_014|bumper_front_part_028|bumper_front_part_018|bumper_front_part_006|bumper_front_part_009|bumper_front_part_031|bumper_front_part_015|tire_wheel_trunk_005001|tire_wheel_trunk_007004|tire_wheel_trunk_009005|tire_wheel_trunk_004003|tire_wheel_trunk_01002|trunk_handle|door_handle|roof|cleaner|hood_grill_part_object003001|hood_grill_part_object005003|hood_grid|hood_grill_part_object055002|hood_part_03|bumper_rear_part_object036001|pipe|bumper_rear_part_torus002005|bumper_rear_part_object044003|bumper_rear_part_object043006|bumper_front_part_024|trunk_part|door_part/i,
     material: "black",
   },
 ];

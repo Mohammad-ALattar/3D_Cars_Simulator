@@ -22,10 +22,10 @@ const preloadModel = (vehicleType: string) => {
       useGLTF.preload("/Car.glb");
       break;
     case "SUV":
-      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP.glb");
+      useGLTF.preload("/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP2.glb");
       break;
     case "PICKUP":
-      useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP.glb");
+      useGLTF.preload("/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP2.glb");
       break;
     default:
       useGLTF.preload("/Car.glb");
