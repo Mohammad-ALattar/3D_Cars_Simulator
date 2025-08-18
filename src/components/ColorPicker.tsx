@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Palette, X } from 'lucide-react';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 interface ColorPickerSidebarProps {
   selectedColor: string;
@@ -77,31 +78,19 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
         />
       )}
 
-      <button
+      <Button
         onClick={() => setIsOpen(true)}
-        className="group  relative border-2 border-white  rounded-xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20"
-        aria-label="Open color picker"
+        className={cn(
+          "group max-lg:fixed z-50 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "max-lg:bottom-4 right-4 ",
+          "lg:left-6 lg:p-6 p-4",
+          "flex flex-col items-center  h-20"
+        )} aria-label="Open color picker"
+        variant='outline'
       >
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <Palette className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
-            {selectedColorData && (
-              <div
-                className="absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-background"
-                style={{ backgroundColor: selectedColorData.hex }}
-              />
-            )}
-          </div>
-          <div className="text-left hidden lg:block">
-            <p className="text-xs font-semibold text-foreground uppercase tracking-wide">
-              Vehicle Color
-            </p>
-            <p className="text-xs text-muted-foreground">
-              {selectedColorData?.name || 'Select Color'}
-            </p>
-          </div>
-        </div>
-      </button>
+        <span className="font-semibold">VEHICLE</span>
+        <span className="font-semibold">COLOR</span>
+      </Button>
 
       <div
         className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
@@ -129,8 +118,8 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
                 key={color.id}
                 onClick={() => handleColorSelect(color.id)}
                 className={`group relative p-4 rounded-xl border-2 transition-all duration-200 focus:outline-none ${selectedColor === color.id
-                    ? 'border-primary bg-color-picker-accent'
-                    : ` bg-background hover:border-primary/30 hover:bg-color-picker-hover`
+                  ? 'border-primary bg-color-picker-accent'
+                  : ` bg-background hover:border-primary/30 hover:bg-color-picker-hover`
                   }`}
                 style={selectedColor === color.id ? { borderColor: color.hex } : {}}
                 aria-label={`Select ${color.name} color`}
