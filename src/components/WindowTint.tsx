@@ -198,13 +198,14 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
         onClick={() => setIsOpen(true)}
         className={cn(
           "group max-lg:fixed z-50 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
-          "max-lg:bottom-4 left-4 max-lg:w-14 max-lg:h-14",
-          "lg:left-6 lg:p-6"
+          "max-lg:bottom-4 left-4 ",
+          "lg:left-6 lg:p-6 p-4",
+          "flex flex-col items-center  h-20"
         )}
         variant="outline"
       >
-        <Settings className="h-5 w-5" />
-        <span className="ml-2 lg:block hidden font-semibold ">Window Tint</span>
+        <span className="font-semibold">WINDOW</span>
+        <span className="font-semibold">TINT</span>
       </Button>
 
       {isOpen && (
@@ -352,8 +353,8 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
       </div>
 
       {/* Specification Card - Outside Sidebar */}
-      {isOpen  && showSpecCard && (
-        <div className="fixed inset-0  flex items-center justify-center lg:right-8 lg:top-14 lg:justify-end lg:z-50 pointer-events-none">
+      {isOpen && showSpecCard && (
+        <div className="fixed inset-0  flex items-center justify-center lg:right-8 lg:top-14 lg:justify-end z-50 pointer-events-none">
           <div className="pointer-events-auto">
             <div className={cn(
               "relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br w-96 max-w-[90vw]",
