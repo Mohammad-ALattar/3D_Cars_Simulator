@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Button } from './ui/button';
 import ModalSubmitSelection, { TintData } from './custom/ModalSubmitSelection';
+import { cn } from '@/lib/utils';
 
 interface TintOption {
   value: string;
@@ -108,16 +109,17 @@ export default function WindowTintSelector({
         }
       `}</style>
       </div>
-      <button
+      <Button
         onClick={() => setModalOpen(true)}
-        className=" bottom-4  py-4 gap-2  flex items-center justify-center max-lg:p-4 lg:w-full  rounded-lg bg-yellow-300 shadow-md text-black"
-        aria-label="Tint information"
+        className={cn(
+          "bottom-4  py-4 gap-2  flex items-center justify-center  lg:w-full  rounded-lg bg-yellow-300 shadow-md text-black",
+          "flex max-lg:flex-col items-center  lg:!h-16 max-lg:h-20"
+        )}
+        variant="outline"
       >
-        <img src="/excemlation-mark.svg" alt="Autobahn" className="w-[20px] h-[20px] " />
-        <p className='text-base'>
-          Submit Request
-        </p>
-      </button>
+        <span className="font-semibold">Submit</span>
+        <span className="font-semibold">Request</span>
+      </Button>
     </>
   );
 }

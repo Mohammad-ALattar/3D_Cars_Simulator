@@ -235,36 +235,6 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
               <X className="h-4 w-4" />
             </Button>
           </div>
-
-          <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-black uppercase tracking-wide">
-              Tint Type
-            </h3>
-            <div className="grid grid-cols-2 gap-2">
-              {tintTypes.map((type) => (
-                <button
-                  key={type.id}
-                  onClick={() => handleTintTypeChange(type.id, type.label, type.subLabel)}
-                  className={cn(
-                    "p-3 rounded-lg border text-center transition-all duration-300 hover:scale-105 hover:shadow-lg",
-                    tintType.id === type.id
-                      ? 'bg-[#9B000E] text-white border-[#9B000E] shadow-lg transform scale-105'
-                      : 'bg-[#f1f1f1] text-black !border-[#18181B] hover:bg-gray-200'
-                  )}
-                >
-                  <div className='flex flex-col gap-2'>
-                    <p className="text-[12px] font-bold mt-1">
-                      {type.label}
-                    </p>
-                    <p className="text-[12px] font-bold mt-1">
-                      {type.subLabel}
-                    </p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger
@@ -306,7 +276,34 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
               />
             </TabsContent>
           </Tabs>
-
+          <div className="space-y-3">
+            <h3 className="text-sm font-semibold text-black uppercase tracking-wide">
+              Tint Type
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              {tintTypes.map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => handleTintTypeChange(type.id, type.label, type.subLabel)}
+                  className={cn(
+                    "p-3 rounded-lg border text-center transition-all duration-300 hover:scale-105 hover:shadow-lg",
+                    tintType.id === type.id
+                      ? 'bg-[#9B000E] text-white border-[#9B000E] shadow-lg transform scale-105'
+                      : 'bg-[#f1f1f1] text-black !border-[#18181B] hover:bg-gray-200'
+                  )}
+                >
+                  <div className='flex flex-col gap-2'>
+                    <p className="text-[12px] font-bold mt-1">
+                      {type.label}
+                    </p>
+                    <p className="text-[12px] font-bold mt-1">
+                      {type.subLabel}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
           {/* Quick Actions */}
           <div className="space-y-3 pt-4 border-t border-border">
             <h3 className="text-sm font-semibold text-black uppercase tracking-wide">
@@ -354,7 +351,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
 
       {/* Specification Card - Outside Sidebar */}
       {isOpen && showSpecCard && (
-        <div className="fixed inset-0  flex items-center justify-center lg:right-8 lg:top-14 lg:justify-end z-50 pointer-events-none">
+        <div className="fixed max-md:inset-20  max-md:max-h-[600px]  flex items-center justify-center lg:right-8 lg:top-14 lg:justify-end z-50 pointer-events-none">
           <div className="pointer-events-auto">
             <div className={cn(
               "relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br w-96 max-w-[90vw]",
