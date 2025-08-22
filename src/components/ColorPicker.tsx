@@ -73,7 +73,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
     <>
       {isOpen && (
         <div
-          className="fixed inset-0   z-50  duration-300"
+          className="fixed inset-0 z-50 duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -93,7 +93,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
       </Button>
 
       <div
-        className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0  bg-white/30 backdrop-blur-lg h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="flex items-center justify-between p-6 bg-white !text-[#9B000E]">
@@ -154,7 +154,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
 
           {/* Current Selection */}
           {selectedColorData && (
-            <div className="mt-6 p-4 bg-color-picker-accent rounded-xl border border-color-picker-border">
+            <div className={`mt-6 p-4 bg-color-picker-accent rounded-xl border-2 border-color-picker-border`} style={{ borderColor: selectedColorData.hex }}>
               <div className="flex items-center gap-3">
                 <img
                   src={selectedColorData.svg}
