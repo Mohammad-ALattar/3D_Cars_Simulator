@@ -73,7 +73,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
     <>
       {isOpen && (
         <div
-          className="fixed inset-0  bg-black/30 backdrop-blur-[2px] z-40 transition-opacity duration-300"
+          className="fixed inset-0   z-50  duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -81,7 +81,7 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
       <Button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "group max-lg:fixed z-50 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "group max-lg:fixed z-40 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
           "max-lg:bottom-4 right-4 ",
           "lg:left-6 lg:p-6 p-4",
           "flex flex-col items-center  h-20"
@@ -96,10 +96,10 @@ const ColorPickerSidebar: React.FC<ColorPickerSidebarProps> = ({ selectedColor, 
         className={`fixed top-0 right-0 h-full w-80 bg-color-picker border-l border-color-picker-border shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
-        <div className="flex items-center justify-between p-6 border-b border-color-picker-border">
+        <div className="flex items-center justify-between p-6 bg-white !text-[#9B000E]">
           <div>
-            <h2 className="text-lg font-bold text-foreground">Vehicle Color</h2>
-            <p className="text-sm text-black">Choose your vehicle's color</p>
+            <h2 className="text-lg font-bold ">Vehicle Color</h2>
+            <p className="text-sm ">Choose your vehicle's color</p>
           </div>
           <Button
             onClick={() => setIsOpen(false)}
