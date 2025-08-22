@@ -197,7 +197,7 @@ const WindowTintSidebar: React.FC<WindowTintSidebarProps> = ({
       <Button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "group max-lg:fixed z-50 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
+          "group max-lg:fixed z-40 border-border border-white hover:bg-transparent bg-color-picker rounded-xl  border-2  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/20",
           "max-lg:bottom-4 left-4 ",
           "lg:left-6 lg:p-6 p-4",
           "flex flex-col items-center  h-20"

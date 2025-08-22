@@ -100,7 +100,7 @@ const View3DComp = () => {
           </Button>
         </div>
         <div className="relative">
-          <div className="absolute top-4  left-4 z-20">
+          <div className="absolute top-4  left-4 z-50">
             <div className='flex flex-col gap-8 '>
               <div className='hidden lg:block'>
                 <ColorPickerSidebar
