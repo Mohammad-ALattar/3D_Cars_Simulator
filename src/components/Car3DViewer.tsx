@@ -53,7 +53,6 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
     }
   }, [vehicleType, ppfOption, ppfOtherColor]);
 
-
   const cameraSettings = {
     position: isMobile ? [12, 2, 12] : [9, 0, 10],
     fov: isMobile ? 50 : 40
@@ -61,7 +60,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
 
   const controlSettings = {
     enablePan: false,
-    enableZoom: true,
+    enableZoom: isMobile ? false : true, // Disable zoom on mobile
     minDistance: isMobile ? 8 : 5,
     maxDistance: isMobile ? 20 : 15,
     autoRotate: autoRotate,
@@ -72,7 +71,12 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
     enableDamping: true,
     dampingFactor: isMobile ? 0.1 : 0.05,
     rotateSpeed: isMobile ? 0.8 : 1.0,
-    zoomSpeed: isMobile ? 0.8 : 1.0
+    zoomSpeed: isMobile ? 0 : 1.0, // Set zoom speed to 0 on mobile
+    // Additional mobile touch controls
+    touches: isMobile ? {
+      ONE: 2, // ROTATE - only allow rotation with one finger
+      TWO: null // Disable two-finger gestures (zoom/pan)
+    } : undefined
   };
 
   return (
@@ -84,7 +88,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
           position: cameraSettings.position as [number, number, number],
           fov: cameraSettings.fov
         }}
-        style={{ touchAction: 'none' }}
+        style={{ touchAction: isMobile ? 'pan-y' : 'none' }} // Allow vertical scrolling on mobile
       >
         <Stage
           intensity={isMobile ? 1.2 : 1.5}
