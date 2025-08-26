@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Stage, Loader } from '@react-three/drei';
 import GLBModel from './GLBModel';
@@ -45,6 +45,9 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
   ppfOtherColor
 }) => {
   const [showPPF, setShowPPF] = useState(true);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
   useEffect(() => {
     preloadModel(vehicleType);
 
@@ -53,6 +56,57 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
     }
   }, [vehicleType, ppfOption, ppfOtherColor]);
 
+  // Handle touch events for mobile scrolling
+  useEffect(() => {
+    if (!isMobile || !canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    let startY = 0;
+    let startX = 0;
+    let isDragging = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+        isDragging = false;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 1) {
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        
+        // If vertical movement is greater than horizontal, allow scrolling
+        if (deltaY > deltaX && deltaY > 10) {
+          // This is a vertical scroll gesture - don't prevent it
+          setIsInteracting(false);
+          return;
+        } else if (deltaX > 10 || deltaY > 10) {
+          // This is likely a rotation gesture
+          isDragging = true;
+          setIsInteracting(true);
+          e.preventDefault();
+        }
+      }
+    };
+
+    const handleTouchEnd = () => {
+      setTimeout(() => setIsInteracting(false), 100);
+    };
+
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile]);
+
   const cameraSettings = {
     position: isMobile ? [12, 2, 12] : [9, 0, 10],
     fov: isMobile ? 50 : 40
@@ -60,35 +114,46 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
 
   const controlSettings = {
     enablePan: false,
-    enableZoom: isMobile ? false : true, // Disable zoom on mobile
+    enableZoom: isMobile ? false : true,
     minDistance: isMobile ? 8 : 5,
     maxDistance: isMobile ? 20 : 15,
-    autoRotate: autoRotate,
+    autoRotate: autoRotate && !isInteracting, // Pause auto-rotate when interacting
     autoRotateSpeed: isMobile ? 0.3 : 0.5,
     minPolarAngle: Math.PI / 2,
     maxPolarAngle: Math.PI / 2,
-    // Mobile-specific touch settings
     enableDamping: true,
     dampingFactor: isMobile ? 0.1 : 0.05,
     rotateSpeed: isMobile ? 0.8 : 1.0,
-    zoomSpeed: isMobile ? 0 : 1.0, // Set zoom speed to 0 on mobile
-    // Additional mobile touch controls
+    zoomSpeed: isMobile ? 0 : 1.0,
+    // Improved mobile touch settings
     touches: isMobile ? {
-      ONE: 2, // ROTATE - only allow rotation with one finger
-      TWO: null // Disable two-finger gestures (zoom/pan)
-    } : undefined
+      ONE: 2, // ROTATE
+      TWO: 0  // Disable two-finger gestures completely
+    } : undefined,
+    // Add event listeners for interaction state
+    onStart: () => setIsInteracting(true),
+    onEnd: () => setTimeout(() => setIsInteracting(false), 100)
   };
 
   return (
-    <>
+    <div 
+      className="w-full h-full"
+      style={{
+        // Allow page scrolling when not interacting with the 3D model
+        touchAction: isMobile ? (isInteracting ? 'none' : 'pan-y') : 'none',
+        // Prevent text selection during interaction
+        userSelect: isInteracting ? 'none' : 'auto',
+        WebkitUserSelect: isInteracting ? 'none' : 'auto'
+      }}
+    >
       <Canvas
+        ref={canvasRef}
         className="w-full h-full"
         shadows
         camera={{
           position: cameraSettings.position as [number, number, number],
           fov: cameraSettings.fov
         }}
-        style={{ touchAction: isMobile ? 'pan-y' : 'none' }} // Allow vertical scrolling on mobile
       >
         <Stage
           intensity={isMobile ? 1.2 : 1.5}
@@ -122,7 +187,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
 
         <OrbitControls {...controlSettings} />
       </Canvas>
-    </>
+    </div>
   );
 };
 

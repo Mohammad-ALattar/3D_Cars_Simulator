@@ -57,7 +57,7 @@ const View3DComp = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 ">
+      <div className="flex-1">
         <div className='absolute inset-0 justify-center'>
           <Car3DViewer
             vehicleType={vehicleType}
