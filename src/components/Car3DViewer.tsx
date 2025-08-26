@@ -47,7 +47,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
 }) => {
   const [showPPF, setShowPPF] = useState(true);
   const [is3DInteractionEnabled, setIs3DInteractionEnabled] = useState(!isMobile);
-
+  
   useEffect(() => {
     preloadModel(vehicleType);
 
@@ -73,7 +73,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
   const controlSettings = {
     enabled: is3DInteractionEnabled, // Key change: disable controls when interaction is disabled
     enablePan: false,
-    enableZoom: true,
+    enableZoom: isMobile ? false : true,
     minDistance: isMobile ? 8 : 5,
     maxDistance: isMobile ? 20 : 15,
     autoRotate: autoRotate && is3DInteractionEnabled, // Only auto-rotate when enabled
@@ -83,7 +83,11 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
     enableDamping: true,
     dampingFactor: isMobile ? 0.1 : 0.05,
     rotateSpeed: isMobile ? 0.8 : 1.0,
-    zoomSpeed: isMobile ? 0.8 : 1.0,
+    zoomSpeed: isMobile ? 0 : 1.0,
+    touches: isMobile ? {
+      ONE: 2, // ROTATE
+      TWO: null // Disable two-finger gestures
+    } : undefined
   };
 
   return (
@@ -93,7 +97,7 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
         <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
           {/* Backdrop blur effect */}
           <div className="absolute inset-0 bg-black/5 backdrop-blur-[1px]" />
-
+          
           {/* Central interaction button */}
           <div className="relative pointer-events-auto">
             <button
@@ -102,16 +106,16 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
             >
               {/* Animated background gradient */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
+              
               {/* Icon container */}
               <div className="relative z-10 flex items-center justify-center">
                 <Move3D className="w-8 h-8 text-gray-700 group-hover:text-blue-600 transition-colors duration-200" />
               </div>
-
+              
               {/* Ripple effect on click */}
               <div className="absolute inset-0 rounded-full bg-blue-400/30 opacity-0 group-active:opacity-100 group-active:animate-ping transition-opacity duration-75" />
             </button>
-
+            
             {/* Floating label */}
             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
               <div className="px-3 py-1.5 bg-black/80 backdrop-blur-sm text-white text-sm rounded-lg shadow-lg">
@@ -127,15 +131,47 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
         </div>
       )}
 
-      {/* Disable interaction indicator when 3D is active on mobile */}
+      {/* Exit 3D interaction button - positioned near car center */}
       {isMobile && is3DInteractionEnabled && (
-        <div className="absolute top-4 right-4 z-30">
+        <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-30">
           <button
             onClick={() => setIs3DInteractionEnabled(false)}
-            className="flex items-center gap-2 px-3 py-2 bg-black/60 backdrop-blur-sm text-white text-xs rounded-lg shadow-lg hover:bg-black/70 transition-colors duration-200"
+            className="group relative flex flex-col items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/15 shadow-2xl hover:bg-black/85 active:scale-95 transition-all duration-200"
           >
-            <Eye className="w-3 h-3" />
-            <span>Exit 3D</span>
+            {/* Subtle glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-red-400/20 via-orange-400/20 to-yellow-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Eye icon with text inside */}
+            <div className="relative z-10 flex items-center justify-center">
+              <div className="relative">
+                {/* Eye outline - larger for better text visibility */}
+                <svg width="40" height="24" viewBox="0 0 40 24" className="text-white group-hover:text-orange-300 transition-colors duration-200">
+                  <path
+                    fill="currentColor"
+                    d="M20 2C11.716 2 4.648 7.162 0 14c4.648 6.838 11.716 12 20 12s15.352-5.162 20-12C35.352 7.162 28.284 2 20 2zm0 18c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z"
+                  />
+                  {/* Inner circle for better text contrast */}
+                  <circle cx="20" cy="14" r="8" fill="rgba(255,255,255,0.9)" className="group-hover:fill-orange-100 transition-all duration-200"/>
+                </svg>
+                
+                {/* Text inside the eye */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-gray-800 text-[9px] font-bold leading-none tracking-tight group-hover:text-orange-800 transition-colors duration-200">
+                    EXIT
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Button label text */}
+            <div className="relative z-10">
+              <span className="text-white text-xs font-medium group-hover:text-orange-300 transition-colors duration-200">
+                Exit 3D Mode
+              </span>
+            </div>
+            
+            {/* Ripple effect */}
+            <div className="absolute inset-0 rounded-2xl bg-orange-400/30 opacity-0 group-active:opacity-100 group-active:animate-ping transition-opacity duration-75" />
           </button>
         </div>
       )}
@@ -148,9 +184,9 @@ const Car3DViewer: React.FC<Car3DViewerProps> = ({
           position: cameraSettings.position as [number, number, number],
           fov: cameraSettings.fov
         }}
-        style={{
-          touchAction: (!is3DInteractionEnabled) ? 'pan-y' : 'none',
-          pointerEvents: (!is3DInteractionEnabled) ? 'none' : 'auto'
+        style={{ 
+          touchAction: (isMobile && !is3DInteractionEnabled) ? 'pan-y' : 'none',
+          pointerEvents: (isMobile && !is3DInteractionEnabled) ? 'none' : 'auto'
         }}
       >
         <Stage
