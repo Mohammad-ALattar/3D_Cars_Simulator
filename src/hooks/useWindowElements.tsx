@@ -23,7 +23,7 @@ interface UseWindowElementsProps {
   backTintPercent: number;
   carColor: THREE.Color;
   windshieldTint?: boolean;
-  vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  vehicleType: "COUPE" | "SUV" | "PICKUP";
 }
 
 export const useWindowElements = ({
@@ -58,7 +58,7 @@ export const useWindowElements = ({
       sideWindows: []
     };
 
-    if (vehicleType == "SEDAN") {
+    if (vehicleType == "COUPE") {
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           const meshName = child.name;

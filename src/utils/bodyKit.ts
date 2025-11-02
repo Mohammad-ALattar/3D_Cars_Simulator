@@ -120,7 +120,7 @@ const FRONT_PARTS_MAP = {
   PICKUP: new Set([
     "ppf-2" , "body_part4_1", "ppf-3" , "body_part4"  , "side_backward_mirror" , "detail_door_handle_side"
   ]),
-  SEDAN: new Set(["ppf-1", "ppf-2"]),
+  COUPE: new Set(["ppf-1", "ppf-2"]),
 } as const;
 
 const PARTIAL_FRONT_PARTS_MAP = {
@@ -128,7 +128,7 @@ const PARTIAL_FRONT_PARTS_MAP = {
   "ppf-1"
   ]),
   PICKUP: new Set(["body_part4_1" , "body_part4" ]),
-  SEDAN: new Set(["ppf-1"]),
+  COUPE: new Set(["ppf-1"]),
 } as const;
 
 export const isBodyPart = (name: string): boolean => {
@@ -140,7 +140,7 @@ export const isBodyPart = (name: string): boolean => {
 
 const isFrontPart = (
   name: string,
-  vehicleType: "SEDAN" | "SUV" | "PICKUP"
+  vehicleType: "COUPE" | "SUV" | "PICKUP"
 ): boolean => {
     console.log(name , "name")
   const lowerName = name.toLowerCase();
@@ -151,7 +151,7 @@ const isFrontPart = (
 
 const isPartialFrontPart = (
   name: string,
-  vehicleType: "SEDAN" | "SUV" | "PICKUP"
+  vehicleType: "COUPE" | "SUV" | "PICKUP"
 ): boolean => {
   console.log(name , "name")
   const lowerName = name.toLowerCase();
@@ -163,7 +163,7 @@ const isPartialFrontPart = (
 const shouldApplyPPF = (
   name: string,
   option: string,
-  vehicleType: "SEDAN" | "SUV" | "PICKUP"
+  vehicleType: "COUPE" | "SUV" | "PICKUP"
 ): boolean => {
   switch (option) {
     case "partial":
@@ -302,7 +302,7 @@ export const resetBodyKitParts = (
   scene: THREE.Group,
   originalGeometries: Map<string, THREE.BufferGeometry>,
   carColor: THREE.Color,
-  vehicleType: "SEDAN" | "SUV" | "PICKUP"
+  vehicleType: "COUPE" | "SUV" | "PICKUP"
 ): void => {
   const materialCache = MaterialCache.getInstance();
 
@@ -335,7 +335,7 @@ export const applyBodyKit = (
   option: string,
   originalGeometries: Map<string, THREE.BufferGeometry>,
   carColor: THREE.Color,
-  vehicleType: "SEDAN" | "SUV" | "PICKUP",
+  vehicleType: "COUPE" | "SUV" | "PICKUP",
   ppfOtherColor: string,
   customPPFColor?: THREE.Color // Add optional custom color parameter
 ): void => {

@@ -14,7 +14,7 @@ interface GLBModelProps {
   frontSideTintPercent: number;
   rearSideTintPercent: number;
   backTintPercent: number;
-  vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  vehicleType: "COUPE" | "SUV" | "PICKUP";
   ppfOtherColor: string;
 }
 
@@ -30,7 +30,7 @@ const GLBModel: React.FC<GLBModelProps> = ({
   ppfOtherColor
 }) => {
   const groupRef = useRef<THREE.Group>(null);
-  const modelPath = vehicleType === 'SEDAN'
+  const modelPath = vehicleType === 'COUPE'
     ? "/Car.glb" : vehicleType === 'PICKUP' ?
       "/GMC_Sierra_(Mk5f)_1500_CrewCab_ShortBox_2022-LP2.glb" : "/Ford_Bronco_(Mk6)_(U725)_4door_Raptor_2022-LP2.glb";
   const { scene } = useGLTF(modelPath);
