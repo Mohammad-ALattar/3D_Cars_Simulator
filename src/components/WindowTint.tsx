@@ -21,7 +21,7 @@ const tintTypes = [
   { id: 'black-vlt', label: 'STANDARD', subLabel: 'Black' },
   { id: 'black-ceramic', label: 'PREMIUM', subLabel: 'Black Ceramic' },
   { id: 'i3-ceramic', label: 'PREMIUM PLUS', subLabel: 'Ceramic I3' },
-  { id: 'air-ceramic', label: 'ADVANCED', subLabel: 'Ceramic I3 Plus' }
+  { id: 'air-ceramic', label: 'ADVANCED', subLabel: 'Air Ceramic I3' }
 ];
 
 const tintSpecs = {
@@ -63,7 +63,7 @@ const tintSpecs = {
   },
   'air-ceramic': {
     title: 'ADVANCED',
-    subTitle: 'Ceramic I3 Plus',
+    subTitle: 'Air Ceramic I3',
     specs: [
       { icon: <Shield className="w-4 h-4" />, label: 'UV Rejection', value: '> 99%' },
       { icon: <Sun className="w-4 h-4" />, label: 'IR Rejection', value: 'High 90%+' },

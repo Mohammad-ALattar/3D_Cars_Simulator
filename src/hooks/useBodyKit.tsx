@@ -8,7 +8,7 @@ interface UseBodyKitProps {
   ppfOption: string;
   showPPF: boolean;
   carColor: THREE.Color;
-  vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  vehicleType: "COUPE" | "SUV" | "PICKUP";
   ppfOtherColor: string;
 }
 

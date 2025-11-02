@@ -5,7 +5,7 @@ import { Move3D, Eye } from 'lucide-react';
 import GLBModel from './GLBModel';
 
 interface Car3DViewerProps {
-  vehicleType: "SEDAN" | "SUV" | "PICKUP";
+  vehicleType: "COUPE" | "SUV" | "PICKUP";
   color: string;
   ppfOption: string;
   frontTintPercent: number;
@@ -19,7 +19,7 @@ interface Car3DViewerProps {
 
 const preloadModel = (vehicleType: string) => {
   switch (vehicleType) {
-    case "SEDAN":
+    case "COUPE":
       useGLTF.preload("/Car.glb");
       break;
     case "SUV":

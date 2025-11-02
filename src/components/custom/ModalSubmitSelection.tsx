@@ -44,7 +44,7 @@ export type TintData = {
   tintType: { id: string; label: string; subLabel: string };
   ppfOption: string;
   carColor: string;
-  vehicleType: "SEDAN" | "SUV" | "PICKUP"
+  vehicleType: "COUPE" | "SUV" | "PICKUP"
 };
 
 type ModalSubmitSelectionProps = {

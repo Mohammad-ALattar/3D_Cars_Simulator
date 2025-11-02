@@ -27,7 +27,7 @@ const View3D = () => {
 
 export default View3D;
 const View3DComp = () => {
-  const [vehicleType, setVehicleType] = useState<"SEDAN" | "SUV" | "PICKUP">('SEDAN');
+  const [vehicleType, setVehicleType] = useState<"COUPE" | "SUV" | "PICKUP">('COUPE');
   const [ppfOption, setPpfOption] = useState('none');
   const [ppfOtherColor, setPpfOtherColor] = useState('none');
   const [tintType, setTintType] = useState({ id: 'black-vlt', label: 'STANDARD', subLabel: 'Black' });
